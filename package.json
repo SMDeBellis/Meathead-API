@@ -1,0 +1,22 @@
+{
+  "author": "Sean DeBellis <sdebellis462@gmail.com>",
+  "name": "meathead",
+  "description": "\"Fitness Application",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "main": "index.js",
+  "engines": {
+    "node": "~0.6.8"
+  },
+  "dependencies": {
+    "restify": "~1.4.4",
+    "dtrace-provider": "~0.4.0",
+    "node-mysql": "~0.4.2",
+    "mysql": "~2.6.1",
+    "fs": "0.0.2"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
