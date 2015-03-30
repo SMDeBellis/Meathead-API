@@ -1,3 +1,7 @@
+/**
+	This is the database connection for the API
+	Needs to deal with pooling requests
+**/
 var mysql = require('mysql');
 
 var db = mysql.createConnection({

@@ -1,3 +1,6 @@
+/**
+	Routes for the API
+**/
 var server = require('./server');
 var resources = require('./resources');
 

@@ -1,3 +1,6 @@
+/**
+	Main access point for the API
+**/
 var server = require('./server');
 
 var port = 8080;

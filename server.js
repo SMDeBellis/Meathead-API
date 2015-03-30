@@ -1,3 +1,6 @@
+/**
+	Server for The Meathead API 
+**/
 var restify = require('restify');
 
 var options = {
