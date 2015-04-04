@@ -9,7 +9,7 @@ module.exports = function register(request, response){
 			response.send({code: '200 OK'});
 		}
 		else{
-			response.send({code: '201 DB ERROR'});
+			response.send({code: '201 User Already Exists'});
 		}			
 	});
 };
