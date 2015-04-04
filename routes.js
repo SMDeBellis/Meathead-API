@@ -16,6 +16,15 @@ server.put('/workouts/new', validator(schemas.workoutSchema) , resources.workout
 server.del('/workouts/remove/:workout', resources.workouts.del );
 
 //exercises
-server.get('/workouts/exercises', resources.exercises.list);
-server.put('/workouts/exercises/new/:exercises', validator(schemas.exerciseSchema) , resources.exercises.create);
-server.del('/workouts/exercises/:exercise', resources.exercises.del);
+// returns a list of exercises to a corresponding workout given by :id which maps to
+// a workout id.
+server.get('/workouts/exercises/:id', resources.exercises.list);
+
+//Loads a list into the data base a list of exercise corresponding to a single workout
+server.put('/workouts/exercises/', validator(schemas.exerciseSchema) , resources.exercises.create);
+
+//removes all exercises that correspond to a workout_id
+server.del('/workouts/exercises/:id', resources.exercises.del);
+
+//Exercise List
+//server.get('/exercise_list', resources.exerciseList.list);
