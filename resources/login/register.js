@@ -1,15 +1,26 @@
 var db = require('../../db');
+var uuidGen = require('node-uuid');
 
 module.exports = function register(request, response){
 	var data = JSON.parse(request.body);
-	// callback is not necessary as schema validation is handled prior to this function being called.
-	db.query("select user_name from users where user_name = ?", data['user_name'], function(err, results){
-		if(results.length == 0){
-			db.query("insert into users (user_name, email, password) values(?,?,?)", [data['user_name'], data['email'], data['pass_hash']]);
-			response.send({code: '200 OK'});
+	// checking error is not necessary as validator checks schema prior to calling this function
+	db.query("select user_name, email from users where user_name = ? or email = ?", [data['user_name'], data['email']], function(err, rows){
+		if(rows.length == 0){
+			var uuid = uuidGen.v4();
+			db.query("insert into users (user_name, email, password, user_id) values(?,?,?,?)", [data['user_name'], data['email'], data['pass_hash'], uuid]);
+			response.send({code: '200 OK', user_id: uuid});
 		}
 		else{
-			response.send({code: '201 User Already Exists'});
+			for(var i in rows){
+				if(rows[i]['user_name'] == data['user_name']){
+					response.send({code: '201 USER'});
+					break;
+				}
+				else if(rows[i]['email'] == data['email']){
+					response.send({code: '201 EMAIL'});
+					break;
+				}
+			}
 		}			
 	});
 };
