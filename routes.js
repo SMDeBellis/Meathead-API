@@ -11,9 +11,9 @@ server.put('/login', validator(schemas.loginSchema), resources.login.verify);
 server.put('/register', validator(schemas.registerSchema), resources.login.register);
 
 //workouts
-server.get('/workouts/:id', resources.workouts.list);//Done (needs testing)
+server.get('/workouts', resources.workouts.list);
 server.put('/workouts/new', validator(schemas.workoutSchema) , resources.workouts.create);
-server.del('/workouts/remove/:workout', resources.workouts.del );
+server.del('/workouts/remove', resources.workouts.del );
 
 //exercises
 // returns a list of exercises to a corresponding workout given by :id which maps to

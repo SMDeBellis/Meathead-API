@@ -48,9 +48,10 @@ create table if not exists exercise_list (
 
 
 create table if not exists workout_exercise_list_rel(
+    id int(11) not null auto_increment,
     workout_id char(36) not null,
     exercise_list_id int not null,
-    primary key (workout_id),
+    primary key (id),
     foreign key (workout_id)
         references workout(workout_id)
         on delete cascade
