@@ -1,4 +1,4 @@
-/*****************************************************
+/****************************************************
 	Exercise Table Loading Script
 *****************************************************/
 var db = require('../db');
@@ -12,17 +12,19 @@ db.query("create table if not exists exercise_list(id int not null auto_incremen
   Function takes a muscle group string and an open file object
   loads the database
 **/
+
 function load_to_database(muscleGroup, data){
 	if(!data) return;
 	var array = data.toString().split('\n');
 	var index = array.indexOf('');
-	if(index != -1){
-		array.splice(index, 1);
-	}
+	//if(index != -1){
+	//	array.splice(index, 1);
+	//}
 	for(i in array){
 		db.query("insert into exercise_list(exercise_name, type) values(?, ?)", [array[i], muscleGroup]);
 		console.log(array[i]);
 	}
+
 }
 
 var muscle_groups = ['abs', 'back', 'biceps', 'chest', 'legs', 'shoulders', 'triceps'];
@@ -35,4 +37,4 @@ for(i in muscle_groups){
 
 db.query("delete from exercise_list where exercise_name = ''");
 
-process.exit(code=0);
+//process.exit(code=0);
