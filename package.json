@@ -19,6 +19,8 @@
     "node-uuid": "^1.4.3",
     "restify": "~1.4.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "frisby": "^0.8.5"
+  },
   "optionalDependencies": {}
 }
