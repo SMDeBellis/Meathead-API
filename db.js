@@ -11,4 +11,19 @@ var db = mysql.createConnection({
 	database: 'meathead_production'
 	});
 
-module.exports = db;
+var testDB = mysql.createConnection({
+	host	: 'localhost',
+	user	: 'root',
+	password: 'meatheadadmin',
+	database: 'meathead_test'
+	});
+
+//switch this variable to false for production mode
+var devmode = true;
+
+if(!devmode){
+	module.exports = db;
+}
+else{
+	module.exports = testDB;
+}
