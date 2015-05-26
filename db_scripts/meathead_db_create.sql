@@ -40,7 +40,7 @@ create table if not exists exercises(
 
 
 create table if not exists exercise_list (
-    id int not null auto_increment,
+		id int not null auto_increment,
     exercise_name varchar(255) not null,
     type varchar(20) not null,
     primary key (id)
@@ -62,7 +62,7 @@ create table if not exists completed_workout_exercises_rel(
     exercises_id int not null,
     primary key (completed_workout_id),
     foreign key (completed_workout_id)
-        references completed_workout(workout_id)
+        references completed_workout(id)
         on delete cascade
 );
 
