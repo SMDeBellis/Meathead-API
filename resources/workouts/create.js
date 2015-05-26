@@ -1,4 +1,4 @@
-var db = require('../../db')
+var db = require('../../db');
 
 /**
 *Function first loads the workout table with the user id, workout id, and workout name.
@@ -19,6 +19,7 @@ var db = require('../../db')
 module.exports = function createWorkout(request, response, next){
 	var data = JSON.parse(request.body);
 	// callback is not necessary as schema validation is handled prior to this function being called.
+	// might need to check that user exists before adding to database
 	db.query("INSERT INTO workout(user_id, workout_id, workout_name) Values(?,?,?)", [data['user_id'],
 											data['workout_id'],
 											data['workout_name']], function(err){

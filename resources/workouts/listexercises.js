@@ -5,7 +5,7 @@ var db = require('../../db');
 *
 * JSON: 
 *	Incoming: { 'user_id' : uuid, 'workout_id' : uuid }
-*	Outgoing: { 'code' : return code [, 'exercises' : [ { 'exercise_id' : int, 'exercise_name' : string, 'exercise_type' : string }, ... ] ]
+*	Outgoing: { 'code' : return code (, 'mod_flag': boolean, 'exercises' : [ { 'exercise_id' : int, 'exercise_name' : string, 'exercise_type' : string }, ... ] ) }
 *
 * Return codes:
 *	201 USER ID ERROR - no user found, no list returned.
