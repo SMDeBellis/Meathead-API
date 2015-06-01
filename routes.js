@@ -16,6 +16,8 @@ server.post('/register', validator(schemas.registerSchema), resources.login.regi
 
 //workouts
 server.post('/workouts', validator(schemas.workoutListSchema), resources.workouts.listworkouts);
+
+//needs tests
 server.post('/workouts/new', validator(schemas.workoutSchema) , resources.workouts.create);
 server.post('/workouts/remove', validator(schemas.workoutDeleteSchema), resources.workouts.del );
 
