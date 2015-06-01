@@ -25,7 +25,7 @@ describe('Login Verification Tests', function(){
 				done();
 			}
 		});
-		db.query('INSERT INTO users(user_id, user_name, email, password) 			  VALUE("11111111-1111-1111-1111-111111111111", "Jimmy", "me@awesome.com", "password"');
+		db.query('INSERT INTO users(user_id, user_name, email, password) VALUE("11111111-1111-1111-1111-111111111111", "Jimmy", "me@awesome.com", "password"');
 
 	});
 	
