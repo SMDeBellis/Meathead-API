@@ -16,7 +16,10 @@ var db = require('../../db');
 **/
 
 module.exports = function delWorkouts(request, response, next){
+	console.log('In delWorkouts***********************');
 	var data = JSON.parse(request.body);
+	console.log('incoming json************************');
+	console.log(data);
 	var workout_id = data['workout_id'];
         var user_id = data['user_id'];
         db.query("SELECT user_id FROM workout WHERE workout_id = ?", workout_id, function(err, rows, fields){

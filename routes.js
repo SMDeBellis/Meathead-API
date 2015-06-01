@@ -1,10 +1,14 @@
-/**
-	Routes for the API
-**/
+
 var server = require('./server');
 var resources = require('./resources');
 var validator = require('./middleware/validator');
 var schemas = require('./schemas');
+
+
+
+/**
+	Routes for the API
+**/
 
 //users
 server.post('/login', validator(schemas.loginSchema), resources.login.verify);

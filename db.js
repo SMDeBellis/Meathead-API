@@ -19,9 +19,9 @@ var testDB = mysql.createConnection({
 	});
 
 //switch this variable to false for production mode
-var devmode = true;
+var devmode = false;
 
-if(!devmode){
+if(process.env.NODE_ENV == 'production'){
 	module.exports = db;
 }
 else{

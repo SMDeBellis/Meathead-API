@@ -1,36 +1,87 @@
-var frisby = require('frisby');
+process.env.NODE_ENV = "test"
+var server = require("../server")
+var assert = require("assert")
+var should = require("should")
+var db = require("../db")
+var http = require("http")
 
-frisby.create('verify success Test').post('http://52.24.72.250/login', {
-		user_name: 'Davey',
-		pass_hash: 'hashval'
-	}, { json: true } )
-	.expectStatus(200)
-	.expectHeaderContains('Content-Type', 'json')
-	.expectJSON({ 
-		code: "200 OK",
-		user_id: "3db0de72-c9ed-4ecc-b5de-efbba0487361"
-	})
-	.toss()
+var header = {
+	"host" : "localhost",
+	"port" : "8080",
+	"path" : "/login",
+	"method" : "POST",
+	"headers" : {
+		"Content-Type" : "application/json"
+	}
+}
+		
+describe('Login Verification Tests', function(){
+	before(function(done){
+		server.listen('8080', function(err, result){
+			if(err){
+				done(err);
+			}
+			else{
+				done();
+			}
+		});
+		db.query('INSERT INTO users(user_id, user_name, email, password) 			  VALUE("11111111-1111-1111-1111-111111111111", "Jimmy", "me@awesome.com", "password"');
 
-frisby.create('verify correct response on invalid user')
-	.post('http://52.24.72.250/login', {
-		user_name: 'PoopStain',
-		pass_hash: 'hashval'
-	}, { json: true } )
-	.expectHeaderContains('Content-Type', 'json')
-	.expectJSON({
-		code: "406 NONEXISTANT"
-	})
-	.toss()
-
-frisby.create('verify correct response on invalid pass')
-	.post('http://52.24.72.250/login', {
-		user_name: 'Davey',
-		pass_hash: 'PoopStain',
-	}, { json: true } )
-	.expectHeaderContains('Content-Type', 'json')
-	.expectJSON({
-		code: "406 NONEXISTANT"
-	})
-	.toss()
+	});
 	
+	after(function(done){
+		server.close();
+		db.query("DELETE FROM users WHERE user_name = ?", "Jimmy");
+		done();
+	});
+
+	it('should exist', function (done) {
+    		should.exist(server);
+    		done();
+  	});
+
+	it('should verify successfully', function(done) {
+		var postData = JSON.stringify({
+			"user_name" : "Jimmy",
+			"pass_hash" : "password"
+		});
+		var request = http.request(header, function(response){
+			response.statusCode.should.eql('200');
+			var data = JSON.parse(response.body);
+			data['code'].should.eql('200 OK');
+		});
+		request.write(postData);
+		done();
+	});
+	
+	it('should respond correctly to an invalid user', function(done) {
+		var postData = JSON.stringify({
+			"user_name" : "Dylan",
+			"pass_hash" : "password"
+		});
+		var request = http.request(header, function(response){
+			response.statusCode.should.eql('200');
+			var data = JSON.parse(response.body);
+			data['code'].should.eql('406 NONEXISTANT');
+		});
+		request.write(postData);
+		done();
+	});
+
+	it('should respond correctly to an invalid user', function(done) {
+		var postData = JSON.stringify({
+			"user_name" : "Jimmy",
+			"pass_hash" : "wrongPassword"
+		});
+		var request = http.request(header, function(response){
+			response.statusCode.should.eql('200');
+			var data = JSON.parse(response.body);
+			data['code'].should.eql('406 NONEXISTANT');
+		});
+		request.write(postData);
+		done();
+	});
+
+});
+	
+process.env.NODE_ENV = 'production'
