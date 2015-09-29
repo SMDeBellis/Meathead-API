@@ -15,14 +15,14 @@ server.post('/login', validator(schemas.loginSchema), resources.login.verify);
 server.post('/register', validator(schemas.registerSchema), resources.login.register);
 
 //workouts
-server.post('/workouts', validator(schemas.workoutListSchema), resources.workouts.listworkouts);
+server.get('/workouts', validator(schemas.workoutListSchema), resources.workouts.listworkouts);
 
 //needs tests
 server.post('/workouts/new', validator(schemas.workoutSchema) , resources.workouts.create);
 server.post('/workouts/remove', validator(schemas.workoutDeleteSchema), resources.workouts.del );
 
 // returns a list of exercises to a corresponding workout
-server.post('/workouts/exercises', validator(schemas.workoutExerciseListSchema), resources.workouts.listexercises);
+server.get('/workouts/exercises', validator(schemas.workoutExerciseListSchema), resources.workouts.listexercises);
 
 
 
