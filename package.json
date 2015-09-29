@@ -11,7 +11,6 @@
     "node": "~0.6.8"
   },
   "dependencies": {
-    "chai": "^2.3.0",
     "dtrace-provider": "~0.4.0",
     "fs": "0.0.2",
     "joi": "^6.0.8",
@@ -20,6 +19,9 @@
     "node-uuid": "^1.4.3",
     "restify": "~1.4.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "mocha": "^2.3.3"
+  },
   "optionalDependencies": {}
 }
