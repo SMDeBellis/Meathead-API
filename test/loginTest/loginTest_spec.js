@@ -29,12 +29,6 @@ describe('Login Verification Tests', function(){
 
 	});
 	
-	after(function(done){
-		server.close();
-		db.query("DELETE FROM users WHERE user_name = ?", "Jimmy");
-		done();
-	});
-
 	it('should exist', function (done){
 
     		should.exist(server);
@@ -83,6 +77,11 @@ describe('Login Verification Tests', function(){
 		done();
 	});
 
+	after(function(done){
+		server.close();
+		db.query("DELETE FROM users WHERE user_name = ?", "Jimmy");
+		done();
+	});
 });
 	
 process.env.NODE_ENV = 'production'

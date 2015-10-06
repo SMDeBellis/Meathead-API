@@ -1,7 +1,6 @@
 process.env.NODE_ENV = "test"
 var server = require("../../server")
-var assert = require("assert")
-var should = require("should")
+var should = require("chai").should()
 var db = require("../../db")
 var http = require("http")
 
@@ -31,13 +30,6 @@ describe('Workout Deletion Tests', function(){
 			}
 		});
 	});
-	
-	after(function(done){
-		server.close();
-		db.query('DELETE FROM workout WHERE workout_name = "Tough Workout"');
-		done();
-	});
-
 	
 	it('should exist', function (done) {
 		should.exist(server);
@@ -98,6 +90,12 @@ describe('Workout Deletion Tests', function(){
 			data['code'].should.eql('203 WORKOUT ID ERROR');
 		});
 		request.write(postData);
+		done();
+	});
+
+	after(function(done){
+		server.close();
+		db.query('DELETE FROM workout WHERE workout_name = "Tough Workout"');
 		done();
 	});
 });

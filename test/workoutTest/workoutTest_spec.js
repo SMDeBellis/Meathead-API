@@ -1,7 +1,6 @@
 process.env.NODE_ENV = "test"
 var server = require("../../server")
-var assert = require("assert")
-var should = require("should")
+var should = require("chai").should()
 var db = require("../../db")
 var http = require("http")
 
